@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
-import os
+import pygame
 
+pygame.mixer.init()
 root = tk.Tk()
 root.title("ORN Client Window")
 
@@ -31,16 +32,29 @@ search_entry.pack(pady=20)
 # Save query when user clicks search button or presses Enter
 def save_query(event=None):
     query = search_entry.get()
-    print("Client search for: " + query)
-    #play_sound()
+    if query == '':
+        messagebox.showerror('Serach Error', 'Error: You didnt search for anything, try again!') #open on Error window
+    else:
+        serach_file = open('queries.txt', 'w')
+        serach_file.write(query)
+        serach_file.close()
+        print("Client search for: " + query)
+        play_searchsound()
 
 # Add search button and bind it to save_query function
 search_button = tk.Button(root, text="Search", font=("Helvetica", 16), command=save_query, bg="#3498db", fg="white")
 search_button.pack(pady=20)
-search_button.bind("<Return>", save_query)
+search_button.bind("<Return>", save_query) #allow user to use the SEARCH button to search
+search_entry.bind("<Return>", save_query) #allow user to use the ENTER button to search
 
 # Add function to play sound when search button or Enter is pressed
-def play_sound():
-    os.system('aplay ClickSound.wav &')
+def play_searchsound():
+    pygame.mixer.music.load('ClickSound.wav')
+    pygame.mixer.music.play()
+
+def play_errorsound():
+    pygame.mixer.music.load('ClickSound.wav')
+    pygame.mixer.music.play()
 
 root.mainloop()
+
