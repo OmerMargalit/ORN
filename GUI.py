@@ -40,6 +40,8 @@ def save_query(event=None):
         serach_file.close()
         print("Client search for: " + query)
         play_searchsound()
+    if query.lower() == 'toyota corolla':
+        play_eastereggsound()
 
 # Add search button and bind it to save_query function
 search_button = tk.Button(root, text="Search", font=("Helvetica", 16), command=save_query, bg="#3498db", fg="white")
@@ -52,9 +54,15 @@ def play_searchsound():
     pygame.mixer.music.load('ClickSound.wav')
     pygame.mixer.music.play()
 
+def play_eastereggsound():
+    pygame.mixer.music.load('COROLLA.wav')
+    pygame.mixer.music.play()
+
 def play_errorsound():
     pygame.mixer.music.load('ClickSound.wav')
     pygame.mixer.music.play()
 
 root.mainloop()
+
+
 
