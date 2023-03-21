@@ -40,7 +40,7 @@ def save_query(event=None):
         serach_file.close()
         print("Client search for: " + query)
         play_searchsound()
-    if query.lower() == 'toyota corolla':
+    if query.lower() == 'toyota corolla 1986':
         play_eastereggsound()
 
 # Add search button and bind it to save_query function
@@ -63,6 +63,5 @@ def play_errorsound():
     pygame.mixer.music.play()
 
 root.mainloop()
-
 
 
